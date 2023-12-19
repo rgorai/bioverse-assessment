@@ -1,0 +1,57 @@
+{
+  "name": "bioverse-assessment",
+  "version": "1.0.0",
+  "main": "./dist/src/app.js",
+  "repository": "https://github.com/rgorai/bioverse-assessment.git",
+  "author": "Ron Gorai <ron.gorai2020@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "dev": "nodemon --files ./server/src/app.ts",
+    "build": "yarn build:client && yarn build:server",
+    "build:client": "yarn --cwd client build",
+    "build:server": "cd server && tsc",
+    "prepare": "husky install && chmod ug+x .husky/*",
+    "pre-commit": "lint-staged --quiet",
+    "seed": "ts-node --files ./tasks/seed.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "path": "^0.12.7",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@rgorai/eslint-config": "^1.1.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
+    "stylelint": "^16.0.2",
+    "stylelint-config-standard-scss": "^12.0.0",
+    "stylelint-prettier": "^5.0.0"
+  },
+  "eslintConfig": {
+    "extends": "@rgorai/eslint-config/.eslintrc"
+  },
+  "prettier": "@rgorai/eslint-config/.prettierrc.js",
+  "stylelint": {
+    "extends": "@rgorai/eslint-config/.stylelintrc"
+  },
+  "lint-staged": {
+    "*": "yarn lint"
+  }
+}
