@@ -13,7 +13,7 @@
     "build:server": "cd server && tsc",
     "prepare": "husky install && chmod ug+x .husky/*",
     "pre-commit": "lint-staged --quiet",
-    "seed": "ts-node --files ./tasks/seed.ts"
+    "seed": "ts-node --files ./server/tasks/seed.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -16,5 +16,7 @@ const getCollectionFn = <T extends Document>(
   }
 }
 
-export const getTicketsCollection =
-  getCollectionFn<CollectionType<Ticket>>('tickets')
+export const getTicketsCollection = getCollectionFn<CollectionType<Ticket>>(
+  'tickets',
+  { status: 1, updatedDate: -1 }
+)

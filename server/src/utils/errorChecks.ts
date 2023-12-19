@@ -59,13 +59,10 @@ export const areValidObjects = <T extends Record<string, any>>(data: T) => {
 }
 
 export const isValidEmail = (email: any) => {
-  if (
-    typeof email !== 'string' ||
-    !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-      email
-    )
-  )
-    throw `Invalid email. Received: ${email}`
+  areValidStrings({ email })
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    throw `Invalid email address: ${email}`
 }
 
 export const isValidDate = (date: any, pastDatesOnly?: boolean) => {
@@ -80,4 +77,8 @@ export const isValidTicketInput = (info: TicketInput) => {
   areValidStrings({ name, email, description })
 
   isValidEmail(email)
+}
+
+export const isValidStatus = (status: any) => {
+  areValidNumbers({ status }, { min: 0, max: 2 })
 }

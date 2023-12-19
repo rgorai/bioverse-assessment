@@ -27,6 +27,6 @@ type TicketInput = Pick<Ticket, 'name' | 'email' | 'description'>
 
 /**
  * @author rgorai
- * @description the different types of ticket statuses
+ * @description the different types of ticket statuses, represented as numbers
  */
-type Status = 'New' | 'In Progress' | 'Resolved'
+type Status = 0 | 1 | 2
