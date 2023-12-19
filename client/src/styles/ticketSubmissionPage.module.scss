@@ -1,0 +1,19 @@
+@use '../mixins.scss' as *;
+
+.container {
+  @include flex-display(column);
+
+  padding: 3rem 2rem;
+
+  form {
+    @include flex-display(column);
+
+    width: 100%;
+    max-width: 30rem;
+    gap: 1em;
+
+    .formGroup {
+      width: 100%;
+    }
+  }
+}

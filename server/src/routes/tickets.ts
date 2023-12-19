@@ -6,6 +6,7 @@ import {
   updateTicketStatus,
 } from '../db/tickets'
 import {
+  areValidStrings,
   isValidObjectId,
   isValidStatus,
   isValidTicketInput,
@@ -55,20 +56,29 @@ ticketsRouter.post('/', async (req, res) => {
     return res.status(400).send(String(err))
   }
 
-  // create ticket and send details
+  // create ticket and send details back
   try {
-    return res.status(200).json(await createTicket(ticketInfo))
+    const ticket = await createTicket(ticketInfo)
+
+    // send email confirmation of ticket creation
+    console.log(
+      `Ticket creation confirmation email sent to ${ticket.email} with the following details:`,
+      ticket
+    )
+
+    return res.status(200).json(ticket)
   } catch (err) {
     return res.status(500).send(String(err))
   }
 })
 
 // update a ticket's status
-ticketsRouter.put('/:ticketId/:newStatus', async (req, res) => {
-  const { ticketId, newStatus } = req.params
+ticketsRouter.put('/:ticketId/status', async (req, res) => {
+  const { ticketId } = req.params
+  const { newStatus } = req.body
 
+  // error check
   try {
-    // error check
     isValidObjectId(ticketId)
     isValidStatus(newStatus)
   } catch (err) {
@@ -77,13 +87,44 @@ ticketsRouter.put('/:ticketId/:newStatus', async (req, res) => {
 
   // send updated ticket information
   try {
-    return res
-      .status(200)
-      .json(await updateTicketStatus(ticketId, Number(newStatus)))
+    return res.status(200).json(await updateTicketStatus(ticketId, newStatus))
   } catch (err: any) {
     if (err.status && err.message)
       return res.status(err.status).send(err.message)
     else return res.status(500).send(String(err))
+  }
+})
+
+// send a message response
+ticketsRouter.put('/:ticketId/message', async (req, res) => {
+  const { ticketId } = req.params
+  const { message } = req.body
+
+  // error check
+  try {
+    isValidObjectId(ticketId)
+    areValidStrings({ message })
+  } catch (err) {
+    return res.status(400).send(String(err))
+  }
+
+  // save message
+  try {
+    const ticket = await getTicketById(ticketId)
+
+    /* update ticket details */
+
+    // send email confirmation of ticket response
+    console.log(
+      `Emailing ${ticket.email} following ticket response: ${message}`
+    )
+
+    // send confirmation of email back to client
+    return res
+      .status(200)
+      .send(`Emailed ${ticket.email} following ticket response: ${message}`)
+  } catch (err) {
+    return res.status(500).send(String(err))
   }
 })
 

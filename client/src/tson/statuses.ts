@@ -1,4 +1,4 @@
-const STATUSES: { [key in ApiStatus]: string } = {
+const STATUSES = {
   0: 'New',
   1: 'In Progress',
   2: 'Resolved',
