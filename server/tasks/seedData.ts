@@ -180,5 +180,3 @@ export const ticketData: Omit<Ticket, '_id'>[] = [
     updatedDate: '2023-11-24T11:40:00.000Z',
   },
 ]
-
-console.log(ticketData)

@@ -28,42 +28,46 @@ const TicketsPage = () => {
       {(pageData) => (
         <div className={styles.container}>
           <h1 className="mb-5">All Tickets</h1>
-          <div className={styles.listWrapper}>
-            {pageData.map((e) => (
-              <div className={styles.ticketListItem} key={e._id}>
-                <div className={styles.infoContainer}>
-                  <div className={styles.heading}>
-                    <div
-                      className={cx(
-                        styles.status,
-                        styles[`status-${e.status}`]
-                      )}
-                    >
-                      {STATUSES[e.status]}
+          {pageData.length === 0 ? (
+            <div className="text-center">There are currently no tickets.</div>
+          ) : (
+            <div className={styles.listWrapper}>
+              {pageData.map((e) => (
+                <div className={styles.ticketListItem} key={e._id}>
+                  <div className={styles.infoContainer}>
+                    <div className={styles.heading}>
+                      <div
+                        className={cx(
+                          styles.status,
+                          styles[`status-${e.status}`]
+                        )}
+                      >
+                        {STATUSES[e.status]}
+                      </div>
+
+                      <div className={styles.date}>
+                        {new Date(e.updatedDate).toLocaleString()}
+                      </div>
                     </div>
 
-                    <div className={styles.date}>
-                      {new Date(e.updatedDate).toLocaleString()}
+                    <div className={styles.name}>{e.name}</div>
+                    <div className="mb-3">{e.email}</div>
+
+                    <div className={styles.description}>
+                      <em>{e.description}</em>
                     </div>
                   </div>
 
-                  <div className={styles.name}>{e.name}</div>
-                  <div className="mb-3">{e.email}</div>
-
-                  <div className={styles.description}>
-                    <em>{e.description}</em>
-                  </div>
+                  <Link
+                    className="btn btn-outline-secondary"
+                    to={`/tickets/${e._id}`}
+                  >
+                    View Details
+                  </Link>
                 </div>
-
-                <Link
-                  className="btn btn-outline-secondary"
-                  to={`/tickets/${e._id}`}
-                >
-                  View Details
-                </Link>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </PageLoader>
