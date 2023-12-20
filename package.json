@@ -9,7 +9,7 @@
     "start": "node ./dist/app.js",
     "dev": "nodemon --files ./server/src/app.ts",
     "build": "yarn build:client && yarn build:server",
-    "build:client": "yarn --cwd client build",
+    "build:client": "yarn --cwd client install && yarn --cwd client build",
     "build:server": "cd server && tsc",
     "prepare": "husky install && chmod ug+x .husky/*",
     "pre-commit": "lint-staged --quiet",
