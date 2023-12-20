@@ -11,6 +11,7 @@
     "build": "yarn build:client && yarn build:server",
     "build:client": "yarn --cwd client install && yarn --cwd client build",
     "build:server": "cd server && tsc",
+    "heroku-postbuild": "yarn --cwd nummle-ui install && yarn build",
     "prepare": "husky install && chmod ug+x .husky/*",
     "pre-commit": "lint-staged --quiet",
     "seed": "ts-node --files ./server/tasks/seed.ts"
