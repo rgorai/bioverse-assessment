@@ -5,6 +5,7 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import TicketSubmissionPage from './Components/TicketSubmissionPage'
 import TicketsPage from './Components/TicketsPage'
 import TicketDetails from './Components/TicketDetails'
+import ServerError from './Components/ServerError'
 
 const APP_SPECS: AppSpecs = [
   {
@@ -54,6 +55,11 @@ const App = () => {
             {APP_SPECS.map((e) => (
               <Route path={e.path} element={e.element} key={e.path} />
             ))}
+
+            <Route
+              path="*"
+              element={<ServerError status="400" statusText="Not Found" />}
+            />
           </Routes>
         </main>
       </BrowserRouter>

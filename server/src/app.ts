@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 configRoutes(app)
 
 if (NODE_ENV === 'production') {
-  app.use(express.static(path.resolve('nummle-ui', 'build')))
+  app.use(express.static(path.resolve('client', 'build')))
   app.get('*', (_, res) => {
-    res.sendFile(path.resolve('nummle-ui', 'build', 'index.html'))
+    res.sendFile(path.resolve('client', 'build', 'index.html'))
   })
 }
 
