@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 import cors from 'cors'
 import configRoutes from './routes/index'
-import { NODE_ENV, PORT } from './utils/env'
+import { PORT } from './utils/env'
 
 const port = PORT || 3001
 
@@ -13,12 +13,10 @@ app.use(express.urlencoded({ extended: true }))
 
 configRoutes(app)
 
-if (NODE_ENV === 'production') {
-  app.use(express.static(path.resolve('client', 'build')))
-  app.get('*', (_, res) => {
-    res.sendFile(path.resolve('client', 'build', 'index.html'))
-  })
-}
+app.use(express.static(path.resolve('client', 'build')))
+app.get('*', (_, res) => {
+  res.sendFile(path.resolve('client', 'build', 'index.html'))
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
