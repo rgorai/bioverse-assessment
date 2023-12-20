@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Form from 'react-bootstrap/esm/Form'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
 import Button from 'react-bootstrap/esm/Button'
@@ -70,12 +70,13 @@ const TicketSubmissionPage = () => {
           {} as TicketInput
         )
         submitTicket(trimmedInputs)
-          .then(({ data }) =>
+          .then(({ data }) => {
             console.log(
               `Ticket creation confirmation email sent to ${data.email} with the following details:`,
               data
             )
-          )
+            setTicketInput(DEFAULT_INPUT_STATE)
+          })
           .catch(({ response }) =>
             console.error('ticket submission error', response)
           )

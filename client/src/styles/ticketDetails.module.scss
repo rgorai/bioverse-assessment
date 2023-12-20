@@ -1,0 +1,25 @@
+@use '../mixins.scss' as *;
+
+.container {
+  @include flex-display(column);
+
+  padding: 3rem;
+
+  .wrapper {
+    @include flex-display(column, flex-start, flex-start);
+
+    .heading {
+      font-size: 1.25em;
+    }
+
+    .forms {
+      @include flex-display(row, space-between);
+
+      width: 100%;
+    }
+
+    .responseForm {
+      width: 25em;
+    }
+  }
+}

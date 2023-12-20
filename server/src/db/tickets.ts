@@ -93,7 +93,7 @@ export const updateTicketStatus = async (
   // ensure ticket exists and status is not being updated to same value
   const ticket = await getTicketById(ticketId)
   if (ticket.status === newStatus)
-    throw { status: 429, message: 'Cannot update status to same value.' }
+    throw { status: 409, message: 'Cannot update status to same value.' }
 
   // update ticket status
   const ticketsCollection = await getTicketsCollection()

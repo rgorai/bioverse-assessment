@@ -5,7 +5,10 @@ export const submitTicket = (ticketInput: TicketInput) =>
 
 export const getAllTickets = () => axios.get<ApiTicket[]>('/api/tickets')
 
-export const respondToTicket = (ticketId: string, message: string) =>
+export const getTicketDetails = (ticketId: string) =>
+  axios.get<ApiTicket>(`/api/tickets/${ticketId}`)
+
+export const sendTicketResponse = (ticketId: string, message: string) =>
   axios.put<string>(`/api/tickets/${ticketId}/message`, { message })
 
 export const updateTicketStatus = (ticketId: string, newStatus: ApiStatus) =>

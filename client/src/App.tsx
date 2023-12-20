@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/esm/Navbar'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import TicketSubmissionPage from './Components/TicketSubmissionPage'
 import TicketsPage from './Components/TicketsPage'
+import TicketDetails from './Components/TicketDetails'
 
 const APP_SPECS: AppSpecs = [
   {
@@ -21,7 +22,7 @@ const APP_SPECS: AppSpecs = [
   {
     label: 'Ticket Details',
     path: '/tickets/:ticketId',
-    element: <>ticket details</>,
+    element: <TicketDetails />,
   },
 ]
 
