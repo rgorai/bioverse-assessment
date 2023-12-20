@@ -8,6 +8,8 @@
   .wrapper {
     @include flex-display(column, flex-start, flex-start);
 
+    max-width: 55rem;
+
     .heading {
       font-size: 1.25em;
     }
